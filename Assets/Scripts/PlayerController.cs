@@ -6,11 +6,17 @@ using UnityEngine.U2D;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool controlsEnabled = true;
+
     public float walkSpeed;
     public float runSpeed;
     public Collider2D interactionPoint;
+    public GameObject projectile1;
+    public float projectileForce;
+    public float attackDamage = 10;
 
     private Rigidbody2D rb;
+    private BoxCollider2D boxCollider;
     private Animator animator;
     private Facing facing = Facing.Down;
 
@@ -19,13 +25,18 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        boxCollider = GetComponent<BoxCollider2D>();
         SetInteractionPoint();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckInput();
+        if(controlsEnabled)
+        {
+            CheckInput();
+            CheckForTrigger();
+        }
     }
 
     private void CheckInput()
@@ -34,7 +45,21 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         bool running = Input.GetAxis("Fire3") > 0;
-        
+
+        //button events
+        if(Input.GetButtonDown("Fire1"))
+        {
+            FireProjectile();
+        }
+        if(Input.GetButtonDown("Fire2"))
+        {
+            Attack();
+        }
+        if(Input.GetButtonDown("Fire3"))
+        {
+            InteractionCheck();
+        }
+
         //set animation
         if(horizontalInput != 0 || verticalInput != 0)
         {
@@ -151,32 +176,71 @@ public class PlayerController : MonoBehaviour
     }
 
     //check for step triggers
-    // private void TriggerCheck()
-    // {
-    //     List<Collider2D> results = new List<Collider2D>();
-    //     ContactFilter2D filter = new ContactFilter2D();
-    //     filter.useTriggers = true;
-    //     if(thisCollider.OverlapCollider(filter, results) > 0)
-    //     {
-    //         Trigger target = results[0].gameObject.GetComponent<Trigger>();
-    //         if(target != null)
-    //         {
-    //             target.Activate();
-    //         }
-    //     }
-    // }
+    private void CheckForTrigger()
+    {
+        List<Collider2D> results = new List<Collider2D>();
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.useTriggers = true;
+        if(boxCollider.OverlapCollider(filter, results) > 0)
+        {
+            Trigger target = results[0].gameObject.GetComponent<Trigger>();
+            if(target != null)
+            {
+                target.Activate();
+            }
+        }
+    }
+
+    private void Attack()
+    {
+        List<Collider2D> results = new List<Collider2D>();
+        if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
+        {
+            foreach(Collider2D current in results)
+            {
+                Enemy foundEnemy = current.gameObject.GetComponent<Enemy>();
+                if(foundEnemy != null)
+                {
+                    Debug.Log("Attack hit " + foundEnemy.name);
+                    //animator.Play("Attack"); //?
+                    foundEnemy.TakeDamage(attackDamage);
+                }
+            }
+        }
+    }
 
     private void InteractionCheck()
     {
         List<Collider2D> results = new List<Collider2D>();
-            if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
+        if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
+        {
+            Interaction target = results[0].gameObject.GetComponent<Interaction>();
+            if(target != null)
             {
-                Interaction target = results[0].gameObject.GetComponent<Interaction>();
-                if(target != null)
-                {
-                    target.Activate();
-                };
-            }
+                target.Activate();
+            };
+        }
+    }
+
+    private void FireProjectile()
+    {
+        Vector2 position = new Vector2(transform.position.x, transform.position.y);
+        GameObject newProjectile = Instantiate(projectile1, position, Quaternion.identity);
+        switch(facing)
+        {
+            case Facing.Up:
+                newProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.up * projectileForce, ForceMode2D.Impulse);
+                break;
+            case Facing.Down:
+                newProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.down * projectileForce, ForceMode2D.Impulse);
+                break;
+            case Facing.Left:
+                newProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.left * projectileForce, ForceMode2D.Impulse);
+                break;
+            case Facing.Right:
+                newProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.right * projectileForce, ForceMode2D.Impulse);
+                break;
+        }
     }
 }
 
