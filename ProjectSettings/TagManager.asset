@@ -44,3 +44,6 @@ TagManager:
   - name: Sprites
     uniqueID: 3440927823
     locked: 0
+  - name: Effects
+    uniqueID: 190203189
+    locked: 0

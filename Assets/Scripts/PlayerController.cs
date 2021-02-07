@@ -15,6 +15,11 @@ public class PlayerController : MonoBehaviour
     public float projectileForce;
     public float attackDamage = 10;
 
+    public int health = 9;
+    public int rupees = 0;
+    public int bombs = 5;
+    public int arrows = 10;
+
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
     private Animator animator;
@@ -23,6 +28,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
@@ -36,7 +42,13 @@ public class PlayerController : MonoBehaviour
         {
             CheckInput();
             CheckForTrigger();
+            UpdateHUD();
         }
+    }
+
+    private void UpdateHUD()
+    {
+        GameManager.instance.hud.GetComponent<HUDManager>().SetValues(rupees, bombs, arrows);
     }
 
     private void CheckInput()
@@ -224,23 +236,27 @@ public class PlayerController : MonoBehaviour
 
     private void FireProjectile()
     {
-        Vector2 position = new Vector2(transform.position.x, transform.position.y);
-        GameObject newProjectile = Instantiate(projectile1, position, Quaternion.identity);
-        switch(facing)
+        if(arrows > 0)
         {
-            case Facing.Up:
-                newProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.up * projectileForce, ForceMode2D.Impulse);
-                break;
-            case Facing.Down:
-                newProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.down * projectileForce, ForceMode2D.Impulse);
-                break;
-            case Facing.Left:
-                newProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.left * projectileForce, ForceMode2D.Impulse);
-                break;
-            case Facing.Right:
-                newProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.right * projectileForce, ForceMode2D.Impulse);
-                break;
-        }
+            arrows--;
+            Vector2 position = new Vector2(transform.position.x, transform.position.y);
+            GameObject newProjectile = Instantiate(projectile1, position, Quaternion.identity);
+            switch(facing)
+            {
+                case Facing.Up:
+                    newProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.up * projectileForce, ForceMode2D.Impulse);
+                    break;
+                case Facing.Down:
+                    newProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.down * projectileForce, ForceMode2D.Impulse);
+                    break;
+                case Facing.Left:
+                    newProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.left * projectileForce, ForceMode2D.Impulse);
+                    break;
+                case Facing.Right:
+                    newProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.right * projectileForce, ForceMode2D.Impulse);
+                    break;
+            }
+        }    
     }
 }
 

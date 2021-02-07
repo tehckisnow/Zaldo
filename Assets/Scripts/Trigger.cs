@@ -6,6 +6,7 @@ using UnityEngine;
 public class Trigger : MonoBehaviour
 {
     public bool active = false;
+    //public bool disableAfterTrigger = true;
 
     public virtual void Activate()
     {
