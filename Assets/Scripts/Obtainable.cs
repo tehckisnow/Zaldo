@@ -30,10 +30,13 @@ public class Obtainable : Trigger
             case "arrow":
                 player.arrows++;
                 break;
+            case "heart":
+                //!
+                break;
             default:
                 break;
         }
-        Debug.Log("got");
+        Debug.Log("got " + this.name);
         Destroy(this.gameObject);
     }
 }

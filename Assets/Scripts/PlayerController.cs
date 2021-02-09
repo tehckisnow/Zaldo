@@ -54,9 +54,9 @@ public class PlayerController : MonoBehaviour
     private void CheckInput()
     {
         //get input
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        bool running = Input.GetAxis("Fire3") > 0;
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
+        bool running = Input.GetAxisRaw("Fire3") > 0;
 
         //button events
         if(Input.GetButtonDown("Fire1"))
