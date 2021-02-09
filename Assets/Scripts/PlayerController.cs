@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System.Data.Common;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.U2D;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,12 +21,19 @@ public class PlayerController : MonoBehaviour
     public int rupees = 0;
     public int bombs = 5;
     public int arrows = 10;
+public Dictionary<string, int> inventory;
 
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
     private Animator animator;
     private Facing facing = Facing.Down;
 
+public enum inventoryThings{
+    rupees,
+    bombs,
+    arrows,
+    carrots
+}
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +42,11 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         SetInteractionPoint();
+
+        foreach(var thing in Enum.GetValues(typeof(inventoryThings)))
+        {
+            inventory.Add(thing.ToString(), 0);
+        }
     }
 
     // Update is called once per frame

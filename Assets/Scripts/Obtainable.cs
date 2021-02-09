@@ -22,6 +22,11 @@ public class Obtainable : Trigger
     {
         PlayerController player = GameManager.instance.player.GetComponent<PlayerController>();
 
+if(player.inventory.ContainsKey(type))
+player.inventory[type]++;
+else{
+    //Debug error
+}
         switch(type)
         {
             case "rupee":
