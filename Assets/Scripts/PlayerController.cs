@@ -18,22 +18,14 @@ public class PlayerController : MonoBehaviour
     public float attackDamage = 10;
 
     public int health = 9;
-    public int rupees = 0;
-    public int bombs = 5;
-    public int arrows = 10;
-public Dictionary<string, int> inventory;
+
+    public Dictionary<ObtainableTypes, int> obtainables = new Dictionary<ObtainableTypes, int>();
 
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
     private Animator animator;
     private Facing facing = Facing.Down;
 
-public enum inventoryThings{
-    rupees,
-    bombs,
-    arrows,
-    carrots
-}
     // Start is called before the first frame update
     void Start()
     {
@@ -43,9 +35,10 @@ public enum inventoryThings{
         boxCollider = GetComponent<BoxCollider2D>();
         SetInteractionPoint();
 
-        foreach(var thing in Enum.GetValues(typeof(inventoryThings)))
+        foreach(ObtainableTypes thing in Enum.GetValues(typeof(ObtainableTypes)))
         {
-            inventory.Add(thing.ToString(), 0);
+            Debug.Log(thing);
+            obtainables.Add(thing, 0);
         }
     }
 
@@ -62,7 +55,11 @@ public enum inventoryThings{
 
     private void UpdateHUD()
     {
-        GameManager.instance.hud.GetComponent<HUDManager>().SetValues(rupees, bombs, arrows);
+        HUDManager hud = GameManager.instance.hud.GetComponent<HUDManager>();
+        hud.SetValues(
+            obtainables[ObtainableTypes.Rupees], 
+            obtainables[ObtainableTypes.Bombs], 
+            obtainables[ObtainableTypes.Arrows]);
     }
 
     private void CheckInput()
@@ -250,9 +247,11 @@ public enum inventoryThings{
 
     private void FireProjectile()
     {
-        if(arrows > 0)
+        if(obtainables[ObtainableTypes.Arrows] > 0)
         {
-            arrows--;
+            //arrows--;
+            obtainables[ObtainableTypes.Arrows]--;
+            
             Vector2 position = new Vector2(transform.position.x, transform.position.y);
             GameObject newProjectile = Instantiate(projectile1, position, Quaternion.identity);
             switch(facing)
