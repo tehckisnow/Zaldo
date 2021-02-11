@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public int lifetime = 300;
-    public float damage = 10;
+    public int damage = 1;
 
     private Collider2D interactionPoint;
 
@@ -37,11 +37,10 @@ public class Projectile : MonoBehaviour
         {
             foreach(Collider2D current in results)
             {
-                Enemy foundEnemy = current.gameObject.GetComponent<Enemy>();
-                if(foundEnemy != null)
+                Health foundTarget = current.gameObject.GetComponent<Health>();
+                if(foundTarget != null)
                 {
-                    Debug.Log("projectile hit " + foundEnemy.name);
-                    foundEnemy.TakeDamage(damage);
+                    foundTarget.TakeDamage(damage);
                     Destroy(this.gameObject);
                 }
             }

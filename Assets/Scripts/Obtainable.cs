@@ -13,6 +13,7 @@ public class Obtainable : Trigger
 {
     public ObtainableTypes type = ObtainableTypes.Rupees;
     public int amount = 1;
+    public AudioSource pickupSound;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +30,8 @@ public class Obtainable : Trigger
     public override void Activate()
     {
         PlayerController player = GameManager.instance.player.GetComponent<PlayerController>();
-
+        //player.PlaySoundEffect(pickupSound);
+        AudioSource.PlayClipAtPoint(pickupSound.clip, gameObject.transform.position);
         if(player.obtainables.ContainsKey(type))
             {
                 player.obtainables[type] += amount;
@@ -40,6 +42,7 @@ public class Obtainable : Trigger
                 Debug.Log("Error: invalid obtainable type");
             }
             Debug.Log("got " + this.name);
+            
             Destroy(this.gameObject);
     }
 }

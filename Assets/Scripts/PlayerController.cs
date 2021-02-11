@@ -15,7 +15,9 @@ public class PlayerController : MonoBehaviour
     public Collider2D interactionPoint;
     public GameObject projectile1;
     public float projectileForce;
-    public float attackDamage = 10;
+    public int attackDamage = 2;
+    public AudioSource projectileSound;
+    public AudioSource swordSound;
 
     public int health = 9;
 
@@ -216,17 +218,17 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
+        swordSound.Play();
         List<Collider2D> results = new List<Collider2D>();
         if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
         {
             foreach(Collider2D current in results)
             {
-                Enemy foundEnemy = current.gameObject.GetComponent<Enemy>();
-                if(foundEnemy != null)
+                Health foundTarget = current.gameObject.GetComponent<Health>();
+                if(foundTarget != null)
                 {
-                    Debug.Log("Attack hit " + foundEnemy.name);
                     //animator.Play("Attack"); //?
-                    foundEnemy.TakeDamage(attackDamage);
+                    foundTarget.TakeDamage(attackDamage);
                 }
             }
         }
@@ -252,6 +254,7 @@ public class PlayerController : MonoBehaviour
             //arrows--;
             obtainables[ObtainableTypes.Arrows]--;
             
+            projectileSound.Play();
             Vector2 position = new Vector2(transform.position.x, transform.position.y);
             GameObject newProjectile = Instantiate(projectile1, position, Quaternion.identity);
             switch(facing)
