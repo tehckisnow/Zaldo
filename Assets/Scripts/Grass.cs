@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Grass : Health
 {
-    public List<GameObject> drops;
     public int dropChanceOutOf100 = 10;
+    public List<GameObject> drops;
 
     public override void Die()
     {

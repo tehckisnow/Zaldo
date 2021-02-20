@@ -19,14 +19,13 @@ public class PlayerController : MonoBehaviour
     public AudioSource projectileSound;
     public AudioSource swordSound;
 
-    public int health = 9;
-
     public Dictionary<ObtainableTypes, int> obtainables = new Dictionary<ObtainableTypes, int>();
 
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
     private Animator animator;
     private Facing facing = Facing.Down;
+    private bool readyForArrow = true; //projectile is ready
 
     // Start is called before the first frame update
     void Start()
@@ -74,7 +73,10 @@ public class PlayerController : MonoBehaviour
         //button events
         if(Input.GetButtonDown("Fire1"))
         {
-            FireProjectile();
+            if(readyForArrow)
+            {
+                StartCoroutine(FireProjectile());                
+            }
         }
         if(Input.GetButtonDown("Fire2"))
         {
@@ -219,6 +221,24 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         swordSound.Play();
+        switch(facing)
+        {
+            case Facing.Down:
+                animator.Play("AttackDown");
+                Debug.Log("attacking down");
+                break;
+            case Facing.Up:
+                animator.Play("AttackUp");
+                break;
+            case Facing.Left:
+                animator.Play("AttackLeft");
+                break;
+            case Facing.Right:
+                animator.Play("AttackRight");
+                break;
+            default:
+                break;
+        }
         List<Collider2D> results = new List<Collider2D>();
         if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
         {
@@ -247,10 +267,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void FireProjectile()
+    private IEnumerator FireProjectile()
     {
         if(obtainables[ObtainableTypes.Arrows] > 0)
         {
+            readyForArrow = false;
+            controlsEnabled = false;
+            yield return new WaitForSeconds(0.5f);
             //arrows--;
             obtainables[ObtainableTypes.Arrows]--;
             
@@ -272,6 +295,8 @@ public class PlayerController : MonoBehaviour
                     newProjectile.GetComponent<Rigidbody2D>().AddForce(Vector2.right * projectileForce, ForceMode2D.Impulse);
                     break;
             }
+            controlsEnabled = true;
+            readyForArrow = true;
         }    
     }
 }
