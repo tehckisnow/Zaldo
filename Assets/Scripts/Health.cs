@@ -14,6 +14,15 @@ public class Health : MonoBehaviour
         {
             Die();
         }
+        StartCoroutine(DamageAnimation());
+    }
+
+    IEnumerator DamageAnimation()
+    {
+        SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
+        sprite.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        sprite.color = Color.white;
     }
 
     public virtual void Heal(int amount)

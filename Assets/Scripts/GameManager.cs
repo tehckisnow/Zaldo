@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject hud;
     public EffectLayer fadeEffect;
+    public GameObject camera;
 
     // Start is called before the first frame update
     void Start()
@@ -26,5 +27,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void PlaySound(AudioSource audio)
+    {
+        audio.Play();
     }
 }

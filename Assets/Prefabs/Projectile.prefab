@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 600
-  damage: 10
+  damage: 1
 --- !u!61 &152980244067205907
 BoxCollider2D:
   m_ObjectHideFlags: 0
