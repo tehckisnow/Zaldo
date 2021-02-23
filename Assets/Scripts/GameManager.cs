@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameObject player;
     public GameObject hud;
+    public EffectLayer fadeEffect;
 
     // Start is called before the first frame update
     void Start()

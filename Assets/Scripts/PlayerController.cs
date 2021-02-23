@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
 
         foreach(ObtainableTypes thing in Enum.GetValues(typeof(ObtainableTypes)))
         {
-            Debug.Log(thing);
             obtainables.Add(thing, 0);
         }
     }
@@ -225,7 +224,6 @@ public class PlayerController : MonoBehaviour
         {
             case Facing.Down:
                 animator.Play("AttackDown");
-                Debug.Log("attacking down");
                 break;
             case Facing.Up:
                 animator.Play("AttackUp");
