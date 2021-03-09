@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
     private Facing facing = Facing.Down;
     private bool readyForArrow = true; //projectile is ready
 
+    private float horizontal;
+    private float vertical;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,29 +80,36 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(FireProjectile());                
             }
         }
-        if(Input.GetButtonDown("Fire2"))
+        if(Input.GetButtonDown("Jump"))
         {
             Attack();
         }
-        if(Input.GetButtonDown("Fire3"))
+        if(Input.GetButtonDown("Fire2"))
         {
             InteractionCheck();
         }
 
+
         //set animation
         if(horizontalInput != 0 || verticalInput != 0)
         {
+            horizontal = horizontalInput;
+            vertical = verticalInput;
+            animator.SetBool("Moving", true);
             SetInteractionPoint();
             DetermineFacing(horizontalInput, verticalInput);
             if(running)
             {animator.speed = 2;}
-            SetWalkingAnim();
+            //SetWalkingAnim();
         }
         else
         {
+            animator.SetBool("Moving", false);
             animator.speed = 1;
-            SetIdleAnim();
+            //SetIdleAnim();
         }
+            animator.SetFloat("Horizontal", horizontal);
+            animator.SetFloat("Vertical", vertical);
 
         //movement
         float speed = walkSpeed;
@@ -138,47 +148,47 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SetIdleAnim()
-    {
-        switch(facing)
-        {
-            case Facing.Down:
-                animator.Play("IdleDown");
-                break;
-            case Facing.Up:
-                animator.Play("IdleUp");
-                break;
-            case Facing.Left:
-                animator.Play("IdleLeft");
-                break;
-            case Facing.Right:
-                animator.Play("IdleRight");
-                break;
-            default:
-                break;
-        }
-    }
+    // private void SetIdleAnim()
+    // {
+    //     switch(facing)
+    //     {
+    //         case Facing.Down:
+    //             animator.Play("IdleDown");
+    //             break;
+    //         case Facing.Up:
+    //             animator.Play("IdleUp");
+    //             break;
+    //         case Facing.Left:
+    //             animator.Play("IdleLeft");
+    //             break;
+    //         case Facing.Right:
+    //             animator.Play("IdleRight");
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 
-    private void SetWalkingAnim()
-    {
-        switch(facing)
-        {
-            case Facing.Down:
-                animator.Play("WalkDown");
-                break;
-            case Facing.Up:
-                animator.Play("WalkUp");
-                break;
-            case Facing.Left:
-                animator.Play("WalkLeft");
-                break;
-            case Facing.Right:
-                animator.Play("WalkRight");
-                break;
-            default:
-                break;
-        }
-    }
+    // private void SetWalkingAnim()
+    // {
+    //     switch(facing)
+    //     {
+    //         case Facing.Down:
+    //             animator.Play("WalkDown");
+    //             break;
+    //         case Facing.Up:
+    //             animator.Play("WalkUp");
+    //             break;
+    //         case Facing.Left:
+    //             animator.Play("WalkLeft");
+    //             break;
+    //         case Facing.Right:
+    //             animator.Play("WalkRight");
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 
     private void SetInteractionPoint()
     {
@@ -220,23 +230,24 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         swordSound.Play();
-        switch(facing)
-        {
-            case Facing.Down:
-                animator.Play("AttackDown");
-                break;
-            case Facing.Up:
-                animator.Play("AttackUp");
-                break;
-            case Facing.Left:
-                animator.Play("AttackLeft");
-                break;
-            case Facing.Right:
-                animator.Play("AttackRight");
-                break;
-            default:
-                break;
-        }
+        animator.SetTrigger("Attack");
+        // switch(facing)
+        // {
+        //     case Facing.Down:
+        //         animator.Play("AttackDown");
+        //         break;
+        //     case Facing.Up:
+        //         animator.Play("AttackUp");
+        //         break;
+        //     case Facing.Left:
+        //         animator.Play("AttackLeft");
+        //         break;
+        //     case Facing.Right:
+        //         animator.Play("AttackRight");
+        //         break;
+        //     default:
+        //         break;
+        // }
         List<Collider2D> results = new List<Collider2D>();
         if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
         {

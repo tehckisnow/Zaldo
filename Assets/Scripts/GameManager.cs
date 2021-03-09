@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject hud;
     public EffectLayer fadeEffect;
-    public GameObject camera;
+    public GameObject currentCamera;
+    public Textbox textbox;
 
     // Start is called before the first frame update
     void Start()

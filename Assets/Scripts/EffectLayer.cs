@@ -9,7 +9,6 @@ public class EffectLayer : MonoBehaviour
 
     private float fadeValue = 0f;
     private float fadeIncrement = 0.01f;
-    private bool currentlyFading = false;
     private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
@@ -47,25 +46,21 @@ public class EffectLayer : MonoBehaviour
 
     IEnumerator SetFadeOutOverTime()
     {
-        currentlyFading = true;
         while(fadeValue < 1)
         {
             fadeValue += fadeIncrement;
             SetFade(fadeValue);
             yield return null;
         }
-        currentlyFading = false;
     }
 
     IEnumerator SetFadeInOverTime()
     {
-        currentlyFading = true;
         while(fadeValue > 0)
         {
             fadeValue -= fadeIncrement;
             SetFade(fadeValue);
             yield return null;
         }
-        currentlyFading = false;
     }
 }

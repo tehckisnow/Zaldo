@@ -30,7 +30,7 @@ public class Obtainable : Trigger
     public override void Activate()
     {
         PlayerController player = GameManager.instance.player.GetComponent<PlayerController>();
-        AudioSource.PlayClipAtPoint(pickupSound.clip, GameManager.instance.camera.transform.position);
+        AudioSource.PlayClipAtPoint(pickupSound.clip, Camera.main.transform.position); //GameManager.instance.currentCamera.transform.position);
         if(player.obtainables.ContainsKey(type))
             {
                 player.obtainables[type] += amount;
