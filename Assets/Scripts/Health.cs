@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int maxHealth = 1;
+    [SerializeField]
+    private int maxHealth = 1;
+    [SerializeField]
     private int health;
+
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
 
     public virtual void TakeDamage(int damage)
     {
@@ -32,6 +44,11 @@ public class Health : MonoBehaviour
         {
             health = maxHealth;
         }
+    }
+
+    public virtual void FullHeal()
+    {
+        health = maxHealth;
     }
 
     public virtual void Die()

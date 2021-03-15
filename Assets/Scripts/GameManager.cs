@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public Textbox textbox;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //singleton
         if(instance == null)
