@@ -9,6 +9,10 @@ public class Health : MonoBehaviour
     [SerializeField]
     private int health;
 
+    [SerializeField]
+    private float invincibilityTime = 1f;
+    private bool invincible = false;
+
     public int GetHealth()
     {
         return health;
@@ -21,12 +25,23 @@ public class Health : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
-        health -= damage;
-        if(health <= 0)
+        if(!invincible)
         {
-            Die();
+            invincible = true;
+            health -= damage;
+            if(health <= 0)
+            {
+                Die();
+            }
+            StartCoroutine(InvinsibilityTimer());
+            StartCoroutine(DamageAnimation());
         }
-        StartCoroutine(DamageAnimation());
+    }
+
+    IEnumerator InvinsibilityTimer()
+    {
+        yield return new WaitForSeconds(invincibilityTime);
+        invincible = false;
     }
 
     IEnumerator DamageAnimation()

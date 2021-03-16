@@ -7,6 +7,7 @@ public enum ObtainableTypes
     Rupees,
     Bombs,
     Arrows,
+    Hearts
 }
 
 public class Obtainable : Trigger
@@ -30,8 +31,21 @@ public class Obtainable : Trigger
     public override void Activate()
     {
         PlayerController player = GameManager.instance.player.GetComponent<PlayerController>();
-        AudioSource.PlayClipAtPoint(pickupSound.clip, Camera.main.transform.position); //GameManager.instance.currentCamera.transform.position);
-        if(player.obtainables.ContainsKey(type))
+        if(pickupSound != null)
+        {
+            AudioSource.PlayClipAtPoint(pickupSound.clip, Camera.main.transform.position); //GameManager.instance.currentCamera.transform.position);
+        }
+        if(type == ObtainableTypes.Hearts)
+        {
+            Health playerHealth = player.gameObject.GetComponent<Health>();
+            Debug.Log(playerHealth);
+            if(playerHealth != null)
+            {
+                Debug.Log("Healing");
+                playerHealth.Heal(amount);
+            }
+        }
+        else if(player.obtainables.ContainsKey(type))
             {
                 player.obtainables[type] += amount;
             }
