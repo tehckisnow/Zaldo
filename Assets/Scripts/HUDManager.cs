@@ -47,15 +47,15 @@ public class HUDManager : MonoBehaviour
         for(int i = 0; i<heartContainers.Length; i++)
         {
             heartContainers[i].gameObject.SetActive(true);
-            if(i < health / 2)
+            if(2 * i < health - 1)
             {
                 heartContainers[i].sprite = fullHeart;
             }
-            else if(i < (health / 2) + 1)
+            else if(2 * i < health)
             {
                 heartContainers[i].sprite = halfHeart;
             }
-            else if(i < maxHealth / 2)
+            else if(2 * i < maxHealth)
             {
                 heartContainers[i].sprite = emptyHeart;
             }
