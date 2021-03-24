@@ -46,10 +46,14 @@ public class Health : MonoBehaviour
 
     IEnumerator DamageAnimation()
     {
-        SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
-        sprite.color = Color.red;
+        Animator animator = gameObject.GetComponent<Animator>();
+        animator.Play("TakeDamage");
         yield return new WaitForSeconds(0.2f);
-        sprite.color = Color.white;
+
+        // SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
+        // sprite.color = Color.red;
+        // yield return new WaitForSeconds(0.2f);
+        // sprite.color = Color.white;
     }
 
     public virtual void Heal(int amount)
@@ -68,8 +72,18 @@ public class Health : MonoBehaviour
 
     public virtual void Die()
     {
+        StartCoroutine(DieAnimation());
+    }
+
+    IEnumerator DieAnimation()
+    {
         //death animation
+        Animator animator = gameObject.GetComponent<Animator>();
+        animator.Play("Die");
+        yield return new WaitForSeconds(0.5f);
         //drops
+
+        //destroy
         Destroy(this.gameObject);
     }
 
