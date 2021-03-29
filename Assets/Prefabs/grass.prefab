@@ -108,7 +108,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8747472, y: 0.8754799}
   m_EdgeRadius: 0
 --- !u!114 &8037089085408368083
 MonoBehaviour:
@@ -123,6 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
+  health: 0
+  invincibilityTime: 1
   dropChanceOutOf100: 50
   drops:
   - {fileID: 8240527962969985297, guid: 0f49567425f24e24a9f3947ad96b054a, type: 3}

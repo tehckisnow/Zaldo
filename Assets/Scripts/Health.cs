@@ -6,7 +6,6 @@ public class Health : MonoBehaviour
 {
     [SerializeField]
     private int maxHealth = 1;
-    [SerializeField]
     private int health;
 
     [SerializeField]
@@ -32,6 +31,7 @@ public class Health : MonoBehaviour
             if(health <= 0)
             {
                 Die();
+                return;
             }
             StartCoroutine(InvinsibilityTimer());
             StartCoroutine(DamageAnimation());
