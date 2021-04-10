@@ -72,6 +72,10 @@ public class Health : MonoBehaviour
 
     public virtual void Die()
     {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        Knockback kb = GetComponent<Knockback>();
+        Destroy(kb);
+        Destroy(rb);
         StartCoroutine(DieAnimation());
     }
 

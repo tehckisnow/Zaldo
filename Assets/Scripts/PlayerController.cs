@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     private float vertical;
 
+    private Vector2 movement;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,16 @@ public class PlayerController : MonoBehaviour
             CheckForTrigger();
             UpdateHUD();
         }
+    }
+
+    void FixedUpdate()
+    {
+        ApplyMovement();
+    }
+
+    void ApplyMovement()
+    {
+        rb.AddForce(movement);
     }
 
     private void UpdateHUD()
@@ -119,7 +131,9 @@ public class PlayerController : MonoBehaviour
         }
         Vector2 newVelocity = new Vector2(horizontalInput * speed, verticalInput * speed);
         
-        rb.velocity = newVelocity;
+        movement = newVelocity;
+        //rb.velocity = newVelocity;
+        //rb.AddForce(newVelocity);
     }
 
     private void DetermineFacing(float horizontal, float vertical)
@@ -231,37 +245,34 @@ public class PlayerController : MonoBehaviour
     {
         swordSound.Play();
         animator.SetTrigger("Attack");
-        // switch(facing)
-        // {
-        //     case Facing.Down:
-        //         animator.Play("AttackDown");
-        //         break;
-        //     case Facing.Up:
-        //         animator.Play("AttackUp");
-        //         break;
-        //     case Facing.Left:
-        //         animator.Play("AttackLeft");
-        //         break;
-        //     case Facing.Right:
-        //         animator.Play("AttackRight");
-        //         break;
-        //     default:
-        //         break;
-        // }
-        List<Collider2D> results = new List<Collider2D>();
-        if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
-        {
-            foreach(Collider2D current in results)
-            {
-                Health foundTarget = current.gameObject.GetComponent<Health>();
-                if(foundTarget != null)
-                {
-                    //animator.Play("Attack"); //?
-                    foundTarget.TakeDamage(attackDamage);
-                }
-            }
-        }
+        interactionPoint.gameObject.SetActive(true);
+        StartCoroutine(EndAttack());
     }
+    IEnumerator EndAttack()
+    {
+        yield return new WaitForSeconds(0.2f);
+        interactionPoint.gameObject.SetActive(false);
+    }
+
+    // private void Attack()
+    // {
+    //     swordSound.Play();
+    //     animator.SetTrigger("Attack");
+        
+    //     List<Collider2D> results = new List<Collider2D>();
+    //     if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
+    //     {
+    //         foreach(Collider2D current in results)
+    //         {
+    //             Health foundTarget = current.gameObject.GetComponent<Health>();
+    //             if(foundTarget != null)
+    //             {
+    //                 //animator.Play("Attack"); //?
+    //                 foundTarget.TakeDamage(attackDamage);
+    //             }
+    //         }
+    //     }
+    // }
 
     private void InteractionCheck()
     {

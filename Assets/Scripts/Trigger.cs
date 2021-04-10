@@ -8,6 +8,11 @@ public class Trigger : MonoBehaviour
     public bool active = false;
     //public bool disableAfterTrigger = true;
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+    }
+
     public virtual void Activate()
     {
         if(active)
