@@ -1,57 +1,126 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class Textbox : MonoBehaviour
 {
-    //[SerializeField] private Text textElement;
-    [SerializeField] private TextMeshProUGUI textElement;
-    [SerializeField] private float textSpeed = 50f;
+    [SerializeField] private TextMeshProUGUI textfield;
+    [SerializeField] private float textSpeed = 0.05f;
+    [SerializeField] private AudioSource sfx;
+    [SerializeField] private string openAnimation = "Open";
+    [SerializeField] private string closeAnimation = "Close";
+    [SerializeField] private float delay = 0.5f;
 
-    public bool isOpen = false;
+    private bool currentlyTyping = false;
+    private string textContent;
+    private int currentPage = 0;
+    private Animator animator;
+    private Action callback;
 
-    public void Write(string textToType)
+    // Start is called before the first frame update
+    void Awake()
     {
-        if(!isOpen)
-        {
-            Open();
-        }
-        StartCoroutine(TypeText(textToType));
+        animator = gameObject.GetComponent<Animator>();
+        textfield.overflowMode = TextOverflowModes.Page;
+        callback += () => {Debug.Log("default callback");}; //generic callback
+        //why is the above line overriding callback = act in Open()?
+        //because Open is called before this gameObject is activated
     }
 
-    public void Open()
+    // Update is called once per frame
+    void Update()
     {
-        isOpen = true;
+        
+    }
+    
+    public void Open(string text, Action act)
+    {
+        callback += act;
+        Open(text);
+    }
+
+    public void Open(string text)
+    {
+        textContent = text;
         gameObject.SetActive(true);
-        //animate
+        //animation
+        if(animator != null)
+        {
+            animator.Play(openAnimation);
+        }
+        textfield.text = text;
+        textfield.maxVisibleCharacters = 0;
+        textfield.pageToDisplay = 1;
+        StartCoroutine(TypeText());
+    }
+
+    IEnumerator TypeText()
+    {
+        //delay for animation
+        yield return new WaitForSeconds(delay);
+        currentlyTyping = true;
+        while(textfield.maxVisibleCharacters <= textfield.textInfo.pageInfo[currentPage].lastCharacterIndex)
+        {
+            if(sfx != null)
+            {
+                sfx.Play();
+            }
+            textfield.maxVisibleCharacters++;
+            yield return new WaitForSeconds(textSpeed);
+        }
+        currentlyTyping = false;
+    }
+
+    public void Advance()
+    {
+        //handle interrupt
+        if(currentlyTyping)
+        {
+            Interrupt();
+        }
+        else
+        //if there is overflow
+        if(textfield.textInfo.pageCount > currentPage + 1)
+        {
+            //int toRemove = textfield.maxVisibleCharacters;
+            //textfield.maxVisibleCharacters = 0;
+            //textfield.text = textfield.text.Substring(toRemove);
+            textfield.pageToDisplay++;
+            currentPage++;
+            StartCoroutine(TypeText());
+        }
+        else 
+        {
+            //if no overflow, call Close()
+            Close();
+        }
     }
 
     public void Close()
     {
-        isOpen = false;
-        textElement.text = string.Empty;
-        //animate
+        currentPage = 0;
+        textfield.text = "";
+        //animation
+        if(animator != null)
+        {
+            animator.Play(closeAnimation);
+        }
+        else 
+        {
+            Disable();
+        }
+        callback();
+    }
+
+    public void Disable()
+    {
         gameObject.SetActive(false);
     }
 
-    private IEnumerator TypeText(string textToType)
+    public void Interrupt()
     {
-        textElement.text = string.Empty;
-        yield return new WaitForSeconds(1);
-        float t = 0;
-        int charIndex = 0;
-        while(charIndex < textToType.Length)
-        {
-            t += Time.deltaTime * textSpeed;
-            charIndex = Mathf.FloorToInt(t);
-            charIndex = Mathf.Clamp(charIndex, 0, textToType.Length);
-
-            textElement.text = textToType.Substring(0, charIndex);
-            yield return null;
-        }
-        textElement.text = textToType;
+        textfield.maxVisibleCharacters = textfield.textInfo.pageInfo[currentPage].lastCharacterIndex;
     }
-
 }

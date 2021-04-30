@@ -162,48 +162,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // private void SetIdleAnim()
-    // {
-    //     switch(facing)
-    //     {
-    //         case Facing.Down:
-    //             animator.Play("IdleDown");
-    //             break;
-    //         case Facing.Up:
-    //             animator.Play("IdleUp");
-    //             break;
-    //         case Facing.Left:
-    //             animator.Play("IdleLeft");
-    //             break;
-    //         case Facing.Right:
-    //             animator.Play("IdleRight");
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
-
-    // private void SetWalkingAnim()
-    // {
-    //     switch(facing)
-    //     {
-    //         case Facing.Down:
-    //             animator.Play("WalkDown");
-    //             break;
-    //         case Facing.Up:
-    //             animator.Play("WalkUp");
-    //             break;
-    //         case Facing.Left:
-    //             animator.Play("WalkLeft");
-    //             break;
-    //         case Facing.Right:
-    //             animator.Play("WalkRight");
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
-
     private void SetInteractionPoint()
     {
         switch(facing)
@@ -254,26 +212,6 @@ public class PlayerController : MonoBehaviour
         interactionPoint.gameObject.SetActive(false);
     }
 
-    // private void Attack()
-    // {
-    //     swordSound.Play();
-    //     animator.SetTrigger("Attack");
-        
-    //     List<Collider2D> results = new List<Collider2D>();
-    //     if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
-    //     {
-    //         foreach(Collider2D current in results)
-    //         {
-    //             Health foundTarget = current.gameObject.GetComponent<Health>();
-    //             if(foundTarget != null)
-    //             {
-    //                 //animator.Play("Attack"); //?
-    //                 foundTarget.TakeDamage(attackDamage);
-    //             }
-    //         }
-    //     }
-    // }
-
     private void InteractionCheck()
     {
         List<Collider2D> results = new List<Collider2D>();
@@ -298,7 +236,11 @@ public class PlayerController : MonoBehaviour
             obtainables[ObtainableTypes.Arrows]--;
             
             projectileSound.Play();
-            Vector2 position = new Vector2(transform.position.x, transform.position.y);
+            
+            //Vector2 position = new Vector2(transform.position.x, transform.position.y);
+            //! replace position with interaction point position so player wont shoot himself
+            Vector2 position = interactionPoint.transform.position;
+            
             GameObject newProjectile = Instantiate(projectile1, position, Quaternion.identity);
             switch(facing)
             {
