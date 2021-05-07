@@ -1,47 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public interface IExecutableAction
-{
-    void ExecuteAction();
-}
+using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
-    public float waitTime = 3f;
-    MonoBehaviour[] monoBehaviours;
+    [SerializeField] private int time = 60;
+    [SerializeField] private bool destroyWhenExpire = true;
+    [SerializeField] private UnityEvent unityEvent;
+
+    private bool expired = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        //get all attached monobehaviors
-        monoBehaviours = gameObject.GetComponents<MonoBehaviour>();
-        //start coroutine
-        StartCoroutine(TimerCoroutine());
+        
     }
 
-    IEnumerator TimerCoroutine()
+    // Update is called once per frame
+    void Update()
     {
-        float elapsedTime = 0;
-        while(elapsedTime <= waitTime)
+        if(!expired)
         {
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        CheckExecutableActions();
-    }
-
-    private void CheckExecutableActions()
-    {
-        foreach(MonoBehaviour monoBehaviour in monoBehaviours)
-        {
-            if(monoBehaviour is IExecutableAction)
+            time--;
+            if(time < 0)
             {
-                IExecutableAction actionableObject = (IExecutableAction)monoBehaviour;
-                actionableObject.ExecuteAction();
+                Debug.Log("Timer Expired");
+                expired = true;
+                unityEvent.Invoke();
+                if(destroyWhenExpire)
+                {
+                    Destroy(this);
+                }
             }
         }
     }
-
 }

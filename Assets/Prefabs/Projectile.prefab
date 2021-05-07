@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 741983738406142572}
   - component: {fileID: 741983738406142563}
   - component: {fileID: 8626175198409613043}
-  - component: {fileID: 5399996398386382308}
   - component: {fileID: 152980244067205907}
+  - component: {fileID: 8869151255840662979}
+  - component: {fileID: 2921711184984410380}
+  - component: {fileID: 5596957935436276158}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -106,20 +108,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5399996398386382308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741983738406142562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 501e0fffd05224e41a12d5be59ac32db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 600
-  damage: 1
 --- !u!61 &152980244067205907
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -130,7 +118,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -146,6 +134,61 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3712024, y: 0.36216486}
   m_EdgeRadius: 0
+--- !u!114 &8869151255840662979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741983738406142562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bc0fa9bfbfbc9146a5d9231e32d0e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2921711184984410380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741983738406142562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79320553ff9f6944fb1a600ae5baafdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 240
+  destroyWhenExpire: 1
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8869151255840662979}
+        m_MethodName: Destruct
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5596957935436276158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741983738406142562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b175f4e3578f0354ea806de5be34ead0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  knockbackForce: 1
+  destroyOnCollision: 1
 --- !u!1 &741983738630956674
 GameObject:
   m_ObjectHideFlags: 0

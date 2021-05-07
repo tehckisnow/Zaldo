@@ -6,6 +6,7 @@ public class DamageSource : MonoBehaviour
 {
     [SerializeField] private int damage = 1;
     [SerializeField] private float knockbackForce = 1;
+    [SerializeField] private bool destroyOnCollision = false;
 
     private Collider2D coll2D;
 
@@ -43,6 +44,10 @@ public class DamageSource : MonoBehaviour
                 knockback.TakeKnockback(transform.position, knockbackForce);
             }
             current++;
+        }
+        if(destroyOnCollision && numberOfResults > 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 }
