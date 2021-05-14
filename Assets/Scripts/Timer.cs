@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] private int time = 60;
     [SerializeField] private bool destroyWhenExpire = true;
-    [SerializeField] private UnityEvent unityEvent;
+    [SerializeField] private UnityEvent unityEvent = null;
 
     private bool expired = false;
 

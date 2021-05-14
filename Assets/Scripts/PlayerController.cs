@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public float walkSpeed;
     public float runSpeed;
     public Collider2D interactionPoint;
+    public Collider2D swordCollider;
+    public GameObject pivotArm; //used to hold interaction point and swordcollider
     public GameObject projectile1;
     public float projectileForce;
     public int attackDamage = 2;
@@ -98,6 +100,7 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetButtonDown("Fire2"))
         {
+            DescriptionCheck();
             InteractionCheck();
         }
 
@@ -132,8 +135,6 @@ public class PlayerController : MonoBehaviour
         Vector2 newVelocity = new Vector2(horizontalInput * speed, verticalInput * speed);
         
         movement = newVelocity;
-        //rb.velocity = newVelocity;
-        //rb.AddForce(newVelocity);
     }
 
     private void DetermineFacing(float horizontal, float vertical)
@@ -167,16 +168,16 @@ public class PlayerController : MonoBehaviour
         switch(facing)
         {
             case Facing.Down:
-                interactionPoint.transform.localPosition = new Vector3(0, -1, 0);
+                pivotArm.transform.eulerAngles = new Vector3(0, 0, 0);
                 break;
             case Facing.Up:
-                interactionPoint.transform.localPosition = new Vector3(0, 1, 0);
+                pivotArm.transform.eulerAngles = new Vector3(0, 0, 180);
                 break;
             case Facing.Left:
-                interactionPoint.transform.localPosition = new Vector3(-1, 0, 0);
+                pivotArm.transform.eulerAngles = new Vector3(0, 0, -90);
                 break;
             case Facing.Right:
-                interactionPoint.transform.localPosition = new Vector3(1, 0, 0);
+                pivotArm.transform.eulerAngles = new Vector3(0, 0, 90);
                 break;
             default:
                 break;
@@ -203,14 +204,30 @@ public class PlayerController : MonoBehaviour
     {
         swordSound.Play();
         animator.SetTrigger("Attack");
-        interactionPoint.gameObject.SetActive(true);
+        swordCollider.gameObject.SetActive(true);
         StartCoroutine(EndAttack());
     }
     IEnumerator EndAttack()
     {
         yield return new WaitForSeconds(0.2f);
-        interactionPoint.gameObject.SetActive(false);
+        swordCollider.gameObject.SetActive(false);
     }
+
+    private void DescriptionCheck()
+    {
+        List<Collider2D> results = new List<Collider2D>();
+        if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
+        {
+            Description target = results[0].gameObject.GetComponent<Description>();
+            if(target != null)
+            {
+                //callback  //!
+                //disable input //!
+                GameManager.instance.textbox.Open(target.description);
+            };
+        }
+    }
+
 
     private void InteractionCheck()
     {

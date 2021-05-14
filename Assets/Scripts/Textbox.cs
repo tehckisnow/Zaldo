@@ -6,9 +6,9 @@ using TMPro;
 
 public class Textbox : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI textfield;
+    [SerializeField] private TextMeshProUGUI textfield = null;
     [SerializeField] private float textSpeed = 0.05f;
-    [SerializeField] private AudioSource sfx;
+    [SerializeField] private AudioSource sfx = null;
     [SerializeField] private string openAnimation = "Open";
     [SerializeField] private string closeAnimation = "Close";
     [SerializeField] private float delay = 0.5f;
@@ -17,7 +17,7 @@ public class Textbox : MonoBehaviour
     private string textContent;
     private int currentPage = 0;
     private Animator animator;
-    private Action callback;
+    private Action callback = null;
 
     // Start is called before the first frame update
     void Awake()
