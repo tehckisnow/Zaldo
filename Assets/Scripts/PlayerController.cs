@@ -37,6 +37,10 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(GameManager.instance.player != this.gameObject)
+        {
+            Destroy(this.gameObject);
+        }
         DontDestroyOnLoad(this.gameObject);
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
