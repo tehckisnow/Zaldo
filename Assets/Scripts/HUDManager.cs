@@ -9,6 +9,7 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI rupeeText;
     public TextMeshProUGUI bombText;
     public TextMeshProUGUI arrowText;
+    public TextMeshProUGUI keyText;
 
     public Sprite emptyHeart;
     public Sprite halfHeart;
@@ -32,11 +33,12 @@ public class HUDManager : MonoBehaviour
         SetHearts();
     }
 
-    public void SetValues(int rupees, int bombs, int arrows)
+    public void SetValues(int rupees, int bombs, int arrows, int keys)
     {
         rupeeText.text = rupees.ToString();
         bombText.text = bombs.ToString();
         arrowText.text = arrows.ToString();
+        keyText.text = keys.ToString();
     }
 
     private void SetHearts()

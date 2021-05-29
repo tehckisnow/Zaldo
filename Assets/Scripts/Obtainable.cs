@@ -7,7 +7,8 @@ public enum ObtainableTypes
     Rupees,
     Bombs,
     Arrows,
-    Hearts
+    Hearts,
+    Keys
 }
 
 public class Obtainable : Trigger

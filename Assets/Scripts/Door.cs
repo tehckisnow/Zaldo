@@ -5,17 +5,36 @@ using UnityEngine.SceneManagement;
 
 public class Door : Trigger
 {
-    public string destinationScene;
-    public float x;
-    public float y;
-    public float fadeTime = 2f;
+    [SerializeField] private string destinationScene;
+    [SerializeField] private float x;
+    [SerializeField] private float y;
+    [SerializeField] private float fadeTime = 2f;
     //soundEffect;
     
-    private bool activated = false;
-
+    [SerializeField] private bool isOpen = true;
+    [SerializeField] private Sprite openedSprite;
+    //private bool activated = false;
+    
     public override void Activate()
     {
-        GameManager.instance.fadeEffect.DoorTransition(x, y, destinationScene, fadeTime);
+        if(isOpen)
+        {
+            GameManager.instance.fadeEffect.DoorTransition(x, y, destinationScene, fadeTime);
+        }
+        else
+        {
+            PlayerController player = GameManager.instance.player.GetComponent<PlayerController>();
+            if(player.obtainables[ObtainableTypes.Keys] > 0)
+            {
+                player.obtainables[ObtainableTypes.Keys] -= 1;
+                if(openedSprite != null)
+                {
+                    GetComponent<SpriteRenderer>().sprite = openedSprite;
+                }
+                isOpen = true;
+                GetComponent<Collider2D>().isTrigger = true;
+            }
+        }
         
         //if(!activated)
         {

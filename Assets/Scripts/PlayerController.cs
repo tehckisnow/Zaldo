@@ -80,7 +80,8 @@ public class PlayerController : MonoBehaviour
         hud.SetValues(
             obtainables[ObtainableTypes.Rupees], 
             obtainables[ObtainableTypes.Bombs], 
-            obtainables[ObtainableTypes.Arrows]);
+            obtainables[ObtainableTypes.Arrows],
+            obtainables[ObtainableTypes.Keys]);
     }
 
     private void CheckInput()
