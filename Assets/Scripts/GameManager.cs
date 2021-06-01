@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public GameObject currentCamera;
     public Textbox textbox;
 
+    public Dictionary<string, bool> gameData = new Dictionary<string, bool>();
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -34,4 +36,24 @@ public class GameManager : MonoBehaviour
     {
         audio.Play();
     }
+
+    //returns a bool indicating whether key was previously registered or not
+    public bool RegisterData(string id, bool data)
+    {
+        if(gameData.ContainsKey(id))
+        {
+            return true;
+        }
+        else
+        {
+            gameData.Add(id, data);
+            return false;
+        }
+    }
+
+    public void SetData(string id, bool data)
+    {
+        gameData[id] = data;
+    }
+
 }

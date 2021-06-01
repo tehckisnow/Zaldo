@@ -1029,6 +1029,12 @@ PrefabInstance:
       propertyPath: x
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3283281462578716238, guid: c03174796474ada4d82ee02c864481db,
+        type: 3}
+      propertyPath: openedSprite
+      value: 
+      objectReference: {fileID: -8012567079455441112, guid: 8785d3817601a934a9db4b2497af63ca,
+        type: 3}
     - target: {fileID: 4080088487781894653, guid: c03174796474ada4d82ee02c864481db,
         type: 3}
       propertyPath: m_Sprite

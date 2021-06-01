@@ -3978,6 +3978,15 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
+  - first: {x: 39, y: -2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 8
+      m_TileSpriteIndex: 8
+      m_TileMatrixIndex: 1
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   - first: {x: -14, y: -1, z: 0}
     second:
       serializedVersion: 2
@@ -9468,6 +9477,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: a644880bd0d66614287acf67c5169f38, type: 2}
   - m_RefCount: 568
     m_Data: {fileID: 11400000, guid: e1cf916b692496d4e858d502d5bac408, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 881b028992434c0408226ef21b2e9718, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
     m_Data: {fileID: 2372846131239295152, guid: 8785d3817601a934a9db4b2497af63ca,
@@ -9493,6 +9504,9 @@ Tilemap:
   - m_RefCount: 568
     m_Data: {fileID: -4956924395538985891, guid: 8785d3817601a934a9db4b2497af63ca,
       type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 5427096849331277519, guid: 8785d3817601a934a9db4b2497af63ca,
+      type: 3}
   m_TileMatrixArray:
   - m_RefCount: 681
     m_Data:
@@ -9512,8 +9526,26 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
+  - m_RefCount: 1
+    m_Data:
+      e00: 1
+      e01: -0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: -1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: -0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_TileColorArray:
-  - m_RefCount: 681
+  - m_RefCount: 682
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -9598,11 +9630,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   destinationScene: 
-  x: 38.5
+  x: 38
   y: -0.5
   fadeTime: 1
   isOpen: 1
-  openedSprite: {fileID: 0}
+  openedSprite: {fileID: 6584484980413776217, guid: 8785d3817601a934a9db4b2497af63ca,
+    type: 3}
 --- !u!212 &972069369
 SpriteRenderer:
   m_ObjectHideFlags: 0

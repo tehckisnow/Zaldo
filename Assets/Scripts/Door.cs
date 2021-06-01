@@ -13,8 +13,31 @@ public class Door : Trigger
     
     [SerializeField] private bool isOpen = true;
     [SerializeField] private Sprite openedSprite;
-    //private bool activated = false;
     
+    private string id = "door";
+
+    void Start()
+    {
+        GenerateId();
+        if(GameManager.instance.RegisterData(id, isOpen))
+        {
+            isOpen = GameManager.instance.gameData[id];
+        }
+        if(isOpen)
+        {
+            OpenDoor();
+        }
+    }
+
+    private void GenerateId()
+    {
+        //id += SceneManager.GetActiveScene().name += transform.position.x.ToString() += transform.position.y.ToString();
+        string scenename = SceneManager.GetActiveScene().name;
+        string x = transform.position.x.ToString();
+        string y = transform.position.y.ToString();
+        id += scenename += x += y;
+    }
+
     public override void Activate()
     {
         if(isOpen)
@@ -26,57 +49,18 @@ public class Door : Trigger
             PlayerController player = GameManager.instance.player.GetComponent<PlayerController>();
             if(player.obtainables[ObtainableTypes.Keys] > 0)
             {
+                GameManager.instance.SetData(id, true);
                 player.obtainables[ObtainableTypes.Keys] -= 1;
-                if(openedSprite != null)
-                {
-                    GetComponent<SpriteRenderer>().sprite = openedSprite;
-                }
+                OpenDoor();
                 isOpen = true;
-                GetComponent<Collider2D>().isTrigger = true;
             }
-        }
-        
-        //if(!activated)
-        {
-            //activated = true;
-            //StartCoroutine(Enter());
         }
     }
 
-    // IEnumerator Enter()
-    // {
-    //     //play sound effect
-
-    //     //disable controls
-    //     GameManager.instance.player.GetComponent<PlayerController>().controlsEnabled = false;
-    //     //begin fade
-    //     GameManager.instance.fadeEffect.FadeOut(fadeTime);
-    //     //fade complete
-    //     yield return new WaitForSeconds(fadeTime);
-    //     //disable character
-    //     GameManager.instance.player.SetActive(false);
-    //     //load next scene
-    //     if(destinationScene != "") //? also check for current scene;
-    //     {
-    //         //SceneManager.LoadScene(destinationScene);
-    //     }
-    //     //position character and re-enable
-    //     GameManager.instance.player.transform.position = new Vector3(x, y, 0f);
-    //     GameManager.instance.player.SetActive(true);
-    //     //begin fade in
-    //     GameManager.instance.fadeEffect.FadeIn(fadeTime);
-    //     //fade in complete
-    //     //reenable controls
-    //     GameManager.instance.player.GetComponent<PlayerController>().controlsEnabled = true;
-    //     activated = false;
-        
-    //     yield return null;
-    // }
-
-    // Start is called before the first frame update
-    void Start()
+    private void OpenDoor()
     {
-        
+        GetComponent<SpriteRenderer>().sprite = openedSprite;
+        GetComponent<Collider2D>().isTrigger = true;
     }
 
     // Update is called once per frame
