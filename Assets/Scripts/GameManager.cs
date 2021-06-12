@@ -11,8 +11,10 @@ public class GameManager : MonoBehaviour
     public EffectLayer fadeEffect;
     public GameObject currentCamera;
     public Textbox textbox;
+    public PersistentData persistentData;
 
-    public Dictionary<string, bool> gameData = new Dictionary<string, bool>();
+    //public Dictionary<string, bool> gameData = new Dictionary<string, bool>();
+    public Dictionary<string, Dictionary<string, bool>> gameData = new Dictionary<string, Dictionary<string, bool>>();
 
     // Start is called before the first frame update
     void Awake()
@@ -37,23 +39,31 @@ public class GameManager : MonoBehaviour
         audio.Play();
     }
 
-    //returns a bool indicating whether key was previously registered or not
-    public bool RegisterData(string id, bool data)
-    {
-        if(gameData.ContainsKey(id))
-        {
-            return true;
-        }
-        else
-        {
-            gameData.Add(id, data);
-            return false;
-        }
-    }
+    // //returns a bool indicating whether key was previously registered or not
+    // public bool RegisterData(string idObject, string idValue, bool data)
+    // {
+    //     if(gameData.ContainsKey(idObject))
+    //     {
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         if(gameData[idObject].ContainsKey(idValue))
+    //         {
+    //             gameData[idObject].Add(idValue, data);
+    //         }
+    //         return false;
+    //     }
+    // }
 
-    public void SetData(string id, bool data)
-    {
-        gameData[id] = data;
-    }
+    // public void SetData(string idObject, string idValue, bool data)
+    // {
+    //     gameData[idObject][idValue] = data;
+    // }
+
+    // public bool GetData(string idObject, string idValue)
+    // {
+    //     return gameData[idObject][idValue];
+    // }
 
 }

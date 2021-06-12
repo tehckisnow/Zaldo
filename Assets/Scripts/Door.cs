@@ -13,19 +13,27 @@ public class Door : Trigger
     
     [SerializeField] private bool isOpen = true;
     [SerializeField] private Sprite openedSprite;
-    
+    [SerializeField] private Sprite closedSprite;
+
     private string id = "door";
 
     void Start()
     {
         GenerateId();
-        if(GameManager.instance.RegisterData(id, isOpen))
+        if(GameManager.instance.persistentData.Exists(id, "isOpen"))
         {
-            isOpen = GameManager.instance.gameData[id];
+            if(GameManager.instance.persistentData.GetData(id, "isOpen"))
+            {
+                OpenDoor();
+            }
+            else
+            {
+                CloseDoor();
+            }
         }
-        if(isOpen)
+        else
         {
-            OpenDoor();
+            GameManager.instance.persistentData.RegisterValue(id, "isOpen", isOpen);
         }
     }
 
@@ -49,7 +57,8 @@ public class Door : Trigger
             PlayerController player = GameManager.instance.player.GetComponent<PlayerController>();
             if(player.obtainables[ObtainableTypes.Keys] > 0)
             {
-                GameManager.instance.SetData(id, true);
+                //GameManager.instance.persistentData.SetData(id, "isOpen", true);
+                GameManager.instance.persistentData.RegisterValue(id, "isOpen", true);
                 player.obtainables[ObtainableTypes.Keys] -= 1;
                 OpenDoor();
                 isOpen = true;
@@ -61,11 +70,13 @@ public class Door : Trigger
     {
         GetComponent<SpriteRenderer>().sprite = openedSprite;
         GetComponent<Collider2D>().isTrigger = true;
+        isOpen = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void CloseDoor()
     {
-        
+        GetComponent<SpriteRenderer>().sprite = closedSprite;
+        GetComponent<Collider2D>().isTrigger = false;
+        isOpen = false;
     }
 }
