@@ -767,6 +767,7 @@ MonoBehaviour:
   isOpen: 1
   openedSprite: {fileID: 0}
   closedSprite: {fileID: 0}
+  persistence: {fileID: 0}
 --- !u!212 &151222580
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1004,6 +1005,7 @@ GameObject:
   - component: {fileID: 392362245}
   - component: {fileID: 392362244}
   - component: {fileID: 392362243}
+  - component: {fileID: 392362247}
   m_Layer: 0
   m_Name: LockedDoor
   m_TagString: Untagged
@@ -1059,6 +1061,7 @@ MonoBehaviour:
     type: 3}
   closedSprite: {fileID: 5750825786435454668, guid: 8785d3817601a934a9db4b2497af63ca,
     type: 3}
+  persistence: {fileID: 0}
 --- !u!212 &392362245
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1124,6 +1127,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &392362247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392362242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1774da5ace11ae94f98e473616f1c667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  component: {fileID: 392362244}
+  startingState: 0
 --- !u!1 &418573306
 GameObject:
   m_ObjectHideFlags: 0
@@ -9654,6 +9671,7 @@ MonoBehaviour:
   openedSprite: {fileID: 6584484980413776217, guid: 8785d3817601a934a9db4b2497af63ca,
     type: 3}
   closedSprite: {fileID: 0}
+  persistence: {fileID: 0}
 --- !u!212 &972069369
 SpriteRenderer:
   m_ObjectHideFlags: 0
