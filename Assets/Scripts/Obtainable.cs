@@ -11,23 +11,13 @@ public enum ObtainableTypes
     Keys
 }
 
-public class Obtainable : Trigger
+public class Obtainable : Trigger, IPersist
 {
     public ObtainableTypes type = ObtainableTypes.Rupees;
     public int amount = 1;
     public AudioSource pickupSound;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Persistence PersistenceComponent { get; set; }
 
     public override void Activate()
     {
@@ -57,6 +47,21 @@ public class Obtainable : Trigger
             }
             Debug.Log("got " + this.name);
             
+            if(PersistenceComponent != null)
+            {
+                PersistenceComponent.SetState("main", true);
+            }
+
             Destroy(this.gameObject);
+    }
+
+    public void TrueState()
+    {
+        Destroy(this.gameObject);
+    }
+
+    public void FalseState()
+    {
+        return;
     }
 }
