@@ -1,12 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Persistence : MonoBehaviour
 {
-    //[SerializeField] private Component component;
-    [SerializeField] private MonoBehaviour component;
+    [SerializeField, SerializeReference] private IPersist component;
     [SerializeField] private bool startingState = false;
 
     private string id;
@@ -16,10 +16,8 @@ public class Persistence : MonoBehaviour
     void Start()
     {
         persistentData = GameManager.instance.persistentData;
-
-        //!component.persistence = this;
-        component.gameObject.GetComponent<Door>().persistence = this;
-
+        component = gameObject.GetComponent<IPersist>();
+        component.PersistenceComponent = this;
         GenerateId();
         SetInitialState();
     }
@@ -44,17 +42,11 @@ public class Persistence : MonoBehaviour
         {
             if(persistentData.GetData(id, "main"))
             {
-                //!component.TrueState();
-                //component.SendMessage("TrueState");
-                component.Invoke("TrueState", 0f);
-                //component.gameObject.GetComponent<Door>().TrueState();
+                component.TrueState();
             }
             else
             {
-                //!component.FalseState();
-                //component.SendMessage("FalseState");
-                component.Invoke("FalseState", 0f);
-                //component.gameObject.GetComponent<Door>().FalseState();
+                component.FalseState();
             }
         }
         else
@@ -62,5 +54,11 @@ public class Persistence : MonoBehaviour
             persistentData.RegisterValue(id, "main", startingState);
         }
     }
+}
 
+interface IPersist
+{
+    Persistence PersistenceComponent { get; set; }
+    void TrueState();
+    void FalseState();
 }
