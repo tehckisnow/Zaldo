@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Persistence : MonoBehaviour
 {
-    [SerializeField, SerializeReference] private IPersist component;
+    private IPersist component;
     [SerializeField] private bool startingState = false;
 
     private string id;
