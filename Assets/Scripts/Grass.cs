@@ -21,16 +21,4 @@ public class Grass : Health
         int choice = Random.Range(0, drops.Count);
         Instantiate(drops[choice], gameObject.transform.position, Quaternion.identity);
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

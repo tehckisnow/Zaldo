@@ -111,6 +111,7 @@ public class Textbox : MonoBehaviour
         {
             Disable();
         }
+        GameManager.instance.player.GetComponent<PlayerController>().inputMode = InputMode.Normal;
         callback();
     }
 

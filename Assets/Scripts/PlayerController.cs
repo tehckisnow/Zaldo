@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
 
     public Dictionary<ObtainableTypes, int> obtainables = new Dictionary<ObtainableTypes, int>();
 
+    public InputMode inputMode = InputMode.Normal;
+
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
     private Animator animator;
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private float vertical;
 
     private Vector2 movement;
+    public GameObject carriedItem;    
 
     // Start is called before the first frame update
     void Start()
@@ -85,6 +88,67 @@ public class PlayerController : MonoBehaviour
     }
 
     private void CheckInput()
+    {
+        switch(inputMode)
+        {
+            case InputMode.Normal:
+                NormalInput();
+                break;
+            case InputMode.Text:
+                TextInput();
+                break;
+            case InputMode.Carry:
+                CarryInput();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void TextInput()
+    {
+        if(Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Fire3"))
+        {
+            GameManager.instance.textbox.Advance();
+        }
+    }
+
+    private void CarryInput()
+    {
+        if(Input.GetButtonDown("Fire2"))
+        {
+            carriedItem.GetComponent<Liftable>().throwObject(facing);
+        }
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
+
+        //set animation
+        if(horizontalInput != 0 || verticalInput != 0)
+        {
+            horizontal = horizontalInput;
+            vertical = verticalInput;
+            animator.SetBool("Moving", true);
+            SetInteractionPoint();
+            DetermineFacing(horizontalInput, verticalInput);
+        }
+        else
+        {
+            animator.SetBool("Moving", false);
+            animator.speed = 1;
+            //SetIdleAnim();
+        }
+            animator.SetFloat("Horizontal", horizontal);
+            animator.SetFloat("Vertical", vertical);
+
+        //movement
+        float speed = walkSpeed;
+        
+        Vector2 newVelocity = new Vector2(horizontalInput * speed, verticalInput * speed);
+        
+        movement = newVelocity;
+    }
+
+    private void NormalInput()
     {
         //get input
         float horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -228,6 +292,7 @@ public class PlayerController : MonoBehaviour
             {
                 //callback  //!
                 //disable input //!
+                inputMode = InputMode.Text;
                 GameManager.instance.textbox.Open(target.description);
             };
         }
@@ -291,4 +356,11 @@ public enum Facing
     Down,
     Left,
     Right
+}
+
+public enum InputMode
+{
+    Normal,
+    Text,
+    Carry
 }
