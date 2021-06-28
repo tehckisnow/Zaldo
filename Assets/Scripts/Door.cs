@@ -21,7 +21,11 @@ public class Door : Trigger, IPersist
     {
         if(isOpen)
         {
-            GameManager.instance.fadeEffect.DoorTransition(x, y, destinationScene, fadeTime);
+            //check if holding object
+            if(GameManager.instance.player.GetComponent<PlayerController>().carriedItem == null)
+            {
+                GameManager.instance.fadeEffect.DoorTransition(x, y, destinationScene, fadeTime);
+            }
         }
         else
         {

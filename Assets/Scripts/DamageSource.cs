@@ -47,7 +47,15 @@ public class DamageSource : MonoBehaviour
         }
         if(destroyOnCollision && numberOfResults > 0)
         {
-            Destroy(this.gameObject);
+            Explode explode = gameObject.GetComponent<Explode>();
+            if(explode != null)
+            {
+                explode.Activate();
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }

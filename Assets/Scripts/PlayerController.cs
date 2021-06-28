@@ -28,14 +28,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
     private Animator animator;
-    private Facing facing = Facing.Down;
+    public Facing facing = Facing.Down;
     private bool readyForArrow = true; //projectile is ready
 
     private float horizontal;
     private float vertical;
 
     private Vector2 movement;
-    public GameObject carriedItem;    
+    public GameObject carriedItem = null;    
 
     // Start is called before the first frame update
     void Start()
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire2"))
         {
-            carriedItem.GetComponent<Liftable>().throwObject(facing);
+            carriedItem?.GetComponent<Liftable>()?.ThrowObject(facing);
         }
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");

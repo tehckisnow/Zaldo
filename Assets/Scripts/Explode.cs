@@ -2,25 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Explode : MonoBehaviour, IExecutableAction
+public class Explode : MonoBehaviour
 {
+    [SerializeField] private Sprite sprite;
+    [SerializeField] private float delay = 1f;
+
     private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();    
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();    
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    public void ExecuteAction()
+    public void Activate()
     {
+        spriteRenderer.sprite = sprite;
         Debug.Log("boom!");
-        spriteRenderer.color = new Color(0.3f, 0.3f, 0.4f, 0.3f);
+        StartCoroutine("DestroyObject");
+    }
+
+    IEnumerator DestroyObject()
+    {
+        Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+        if(rb != null)
+        {
+            rb.velocity = Vector2.zero;
+            rb.isKinematic = true;
+        }
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }

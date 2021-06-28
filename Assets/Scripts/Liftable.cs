@@ -9,6 +9,7 @@ public class Liftable : Interaction
 
     private GameObject playerObject;
     private PlayerController playerComponent;
+    private float reactivateDelay = 0.2f;
 
     public override void Activate()
     {
@@ -42,8 +43,8 @@ public class Liftable : Interaction
         SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         float maxDistanceDelta = 0.3f;
         float seconds = 0.1f;
-        // string origSortingLayer = spriteRenderer.sortingLayerName;
-        // spriteRenderer.sortingLayerName = "Effects";
+        //string origSortingLayer = spriteRenderer.sortingLayerName;
+        spriteRenderer.sortingLayerName = "Effects";
         Vector2 target = new Vector2(0, 1);
         Vector2 current = gameObject.transform.localPosition;
         while(current != target)
@@ -54,7 +55,7 @@ public class Liftable : Interaction
         }
     }
 
-    public void throwObject(Facing facing)
+    public void ThrowObject(Facing facing)
     {
         gameObject.transform.parent = null;
         Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
@@ -83,18 +84,23 @@ public class Liftable : Interaction
         }
         rb.AddForce(new Vector2(x, y) * 500);
         ////apply gravity force
+
         //activate damage component
-        gameObject.GetComponent<DamageSource>().enabled = true;
+        //gameObject.GetComponent<DamageSource>().enabled = true;
+        //gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        StartCoroutine("ActivateDamage");
+
         playerComponent.inputMode = InputMode.Normal;
-        gameObject.GetComponent<BoxCollider2D>().enabled = true;
         playerComponent.carriedItem = null;
         //start timer ??
         //??
         //
     }
 
-    private void Destroy()
+    IEnumerator ActivateDamage()
     {
-
+        yield return new WaitForSeconds(reactivateDelay);
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        gameObject.GetComponent<DamageSource>().enabled = true;
     }
 }
