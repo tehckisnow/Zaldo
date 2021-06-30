@@ -68,10 +68,10 @@ public class Liftable : Interaction
         switch(facing)
         {
             case Facing.Up:
-                y = 2; //!
+                y = 1; //!
                 break;
             case Facing.Down:
-                y = -2; //!
+                y = -1; //!
                 break;
             case Facing.Left:
                 x = -1;

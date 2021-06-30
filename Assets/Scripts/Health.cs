@@ -27,7 +27,11 @@ public class Health : MonoBehaviour
         if(!invincible)
         {
             //check if player and is carrying a liftable; if so, throw it
-            gameObject.GetComponent<PlayerController>()?.carriedItem?.GetComponent<Liftable>().ThrowObject(gameObject.GetComponent<PlayerController>().facing);
+            PlayerController playerController = gameObject.GetComponent<PlayerController>();
+            if(playerController?.carriedItem != null)
+            {
+                playerController.carriedItem.GetComponent<Liftable>().ThrowObject(playerController.facing);
+            }
 
             invincible = true;
             health -= damage;
