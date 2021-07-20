@@ -130,6 +130,7 @@ MonoBehaviour:
   - {fileID: 3551896170943353544, guid: a0bbc301b4af2f044ac5efbf69cb1439, type: 3}
   - {fileID: 1478484139681469090, guid: ca960f6c680641b4c9fea7d5df875129, type: 3}
   - {fileID: 8240527962969985297, guid: 0f49567425f24e24a9f3947ad96b054a, type: 3}
+  projectileLife: 0.6
 --- !u!50 &6296333705017294649
 Rigidbody2D:
   serializedVersion: 4

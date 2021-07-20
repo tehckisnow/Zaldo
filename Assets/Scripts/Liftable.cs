@@ -10,6 +10,7 @@ public class Liftable : Interaction
     private GameObject playerObject;
     private PlayerController playerComponent;
     private float reactivateDelay = 0.2f;
+    [SerializeField] private float projectileLife = 1f;
 
     public override void Activate()
     {
@@ -94,7 +95,7 @@ public class Liftable : Interaction
         playerComponent.carriedItem = null;
         //start timer ??
         //??
-        //
+        StartCoroutine(DestroyTimer());
     }
 
     IEnumerator ActivateDamage()
@@ -102,5 +103,11 @@ public class Liftable : Interaction
         yield return new WaitForSeconds(reactivateDelay);
         gameObject.GetComponent<BoxCollider2D>().enabled = true;
         gameObject.GetComponent<DamageSource>().enabled = true;
+    }
+
+    IEnumerator DestroyTimer()
+    {
+        yield return new WaitForSeconds(projectileLife);
+        gameObject.GetComponent<Explode>().Activate();
     }
 }
