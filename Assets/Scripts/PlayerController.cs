@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public Collider2D swordCollider;
     public GameObject pivotArm; //used to hold interaction point and swordcollider
     public GameObject projectile1;
+    public GameObject bomb1;
     public float projectileForce;
     public int attackDamage = 2;
     public AudioSource projectileSound;
@@ -172,6 +173,11 @@ public class PlayerController : MonoBehaviour
             DescriptionCheck();
             InteractionCheck();
         }
+        //bomb
+        if(Input.GetButtonDown("Fire3"))
+        {
+            DropBomb();
+        }
 
 
         //set animation
@@ -232,6 +238,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void DropBomb()
+    {
+        if(obtainables[ObtainableTypes.Bombs] > 0)
+        {
+            //readyForArrow = false;
+            //controlsEnabled = false;
+            //yield return new WaitForSeconds(0.5f);
+            //projectileSound.Play();
+            
+            obtainables[ObtainableTypes.Bombs]--;
+            
+            //facing
+            Vector3 position = interactionPoint.transform.position;
+
+            //place bomb
+            Instantiate(bomb1, position, Quaternion.identity);
+        }
+    }
+    
     private void SetInteractionPoint()
     {
         switch(facing)

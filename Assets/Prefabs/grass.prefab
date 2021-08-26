@@ -129,6 +129,8 @@ MonoBehaviour:
   drops:
   - {fileID: 8240527962969985297, guid: 0f49567425f24e24a9f3947ad96b054a, type: 3}
   - {fileID: 1478484139681469090, guid: ca960f6c680641b4c9fea7d5df875129, type: 3}
+  - {fileID: 3551896170943353544, guid: a0bbc301b4af2f044ac5efbf69cb1439, type: 3}
+  - {fileID: 9035806427789318400, guid: d065dc4d174cd934082b723f87b128d8, type: 3}
 --- !u!114 &8879892726867102293
 MonoBehaviour:
   m_ObjectHideFlags: 0
