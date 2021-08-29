@@ -6,6 +6,7 @@ public class Explode : MonoBehaviour
 {
     [SerializeField] private Sprite sprite;
     [SerializeField] private float delay = 1f;
+    [SerializeField] private AudioSource soundEffect;
 
     private SpriteRenderer spriteRenderer;
 
@@ -19,6 +20,7 @@ public class Explode : MonoBehaviour
     public void Activate()
     {
         spriteRenderer.sprite = sprite;
+        spriteRenderer.sortingLayerName = "Effects";
         Debug.Log("boom!");
         StartCoroutine("DestroyObject");
     }
@@ -30,6 +32,10 @@ public class Explode : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
             rb.isKinematic = true;
+        }
+        if(soundEffect != null)
+        {
+            soundEffect.Play();
         }
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);

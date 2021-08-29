@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public GameObject pivotArm; //used to hold interaction point and swordcollider
     public GameObject projectile1;
     public GameObject bomb1;
+    public AudioSource layBombSfx;
     public float projectileForce;
     public int attackDamage = 2;
     public AudioSource projectileSound;
@@ -254,6 +255,10 @@ public class PlayerController : MonoBehaviour
 
             //place bomb
             Instantiate(bomb1, position, Quaternion.identity);
+            if(layBombSfx != null)
+            {
+                layBombSfx.Play();
+            }
         }
     }
     
