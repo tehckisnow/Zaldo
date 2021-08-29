@@ -286,10 +286,13 @@ public class PlayerController : MonoBehaviour
         filter.useTriggers = true;
         if(boxCollider.OverlapCollider(filter, results) > 0)
         {
-            Trigger target = results[0].gameObject.GetComponent<Trigger>();
-            if(target != null)
+            foreach(Collider2D item in results)
             {
-                target.Activate();
+                Trigger target = item.gameObject.GetComponent<Trigger>();
+                if(target != null)
+                {
+                    target.Activate();
+                }
             }
         }
     }
@@ -312,14 +315,19 @@ public class PlayerController : MonoBehaviour
         List<Collider2D> results = new List<Collider2D>();
         if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
         {
-            Description target = results[0].gameObject.GetComponent<Description>();
-            if(target != null)
+            //!Following line uses first result instead of iterating, see InteractionCheck() below
+            foreach(Collider2D item in results)
             {
-                //callback  //!
-                //disable input //!
-                inputMode = InputMode.Text;
-                GameManager.instance.textbox.Open(target.description);
-            };
+                Description target = item.gameObject.GetComponent<Description>();
+                if(target != null)
+                {
+                    //callback  //!
+                    //disable input //!
+                    inputMode = InputMode.Text;
+                    GameManager.instance.textbox.Open(target.description);
+                    break;
+                };
+            }
         }
     }
 
@@ -329,11 +337,16 @@ public class PlayerController : MonoBehaviour
         List<Collider2D> results = new List<Collider2D>();
         if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
         {
-            Interaction target = results[0].gameObject.GetComponent<Interaction>();
-            if(target != null)
+            foreach(Collider2D item in results)
             {
-                target.Activate();
-            };
+
+                Interaction target = item.gameObject.GetComponent<Interaction>();
+                if(target != null)
+                {
+                    target.Activate();
+                    break;
+                };
+            }
         }
     }
 
