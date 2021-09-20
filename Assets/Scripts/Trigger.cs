@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
-    public bool active = false;
+    public bool active = true;
     //public bool disableAfterTrigger = true;
 
     void OnCollisionEnter2D(Collision2D collision)

@@ -89,6 +89,7 @@ public class Liftable : Interaction
         //activate damage component
         //gameObject.GetComponent<DamageSource>().enabled = true;
         //gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        
         StartCoroutine("ActivateDamage");
 
         playerComponent.inputMode = InputMode.Normal;

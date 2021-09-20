@@ -54,7 +54,10 @@ public class Health : MonoBehaviour
     IEnumerator DamageAnimation()
     {
         Animator animator = gameObject.GetComponent<Animator>();
-        animator.Play("TakeDamage");
+        if(animator != null)
+        {
+            animator.Play("TakeDamage");
+        }
         yield return new WaitForSeconds(0.2f);
 
         // SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
