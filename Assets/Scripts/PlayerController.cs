@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     public Facing facing = Facing.Down;
     private bool readyForArrow = true; //projectile is ready
+    private bool readyForBomb = true; //bomb is ready
+    private float bombReadyDelay = 1f;
 
     private float horizontal;
     private float vertical;
@@ -241,9 +243,9 @@ public class PlayerController : MonoBehaviour
 
     private void DropBomb()
     {
-        if(obtainables[ObtainableTypes.Bombs] > 0)
+        if(obtainables[ObtainableTypes.Bombs] > 0 && readyForBomb)
         {
-            //readyForArrow = false;
+            readyForBomb = false;
             //controlsEnabled = false;
             //yield return new WaitForSeconds(0.5f);
             //projectileSound.Play();
@@ -259,7 +261,14 @@ public class PlayerController : MonoBehaviour
             {
                 layBombSfx.Play();
             }
+            StartCoroutine(ReadyBomb());
         }
+    }
+
+    IEnumerator ReadyBomb()
+    {
+        yield return new WaitForSeconds(bombReadyDelay);
+        readyForBomb = true;
     }
     
     private void SetInteractionPoint()

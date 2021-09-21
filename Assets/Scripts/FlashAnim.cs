@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FlashAnim : MonoBehaviour
 {
-    public float time = 8f;
+    public float time = 2000000f;
     public float whiteTime = 0.1f;
-    public float triggerThreshold = 0.01f;
+    public float triggerThreshold = 0.001f;
     [SerializeField] private Sprite spriteA = null;
     [SerializeField] private Sprite spriteB = null;
     private SpriteRenderer spriteRenderer;

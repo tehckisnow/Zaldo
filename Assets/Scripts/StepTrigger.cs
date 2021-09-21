@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class StepTrigger : Trigger
+public class StepTrigger : Trigger, IPersist
 {
-    //public bool active = true;
-
+    
+    public Persistence PersistenceComponent { get; set; }
     [SerializeField] private Sprite defaultSprite = null;
     [SerializeField] private Sprite activatedSprite = null;
     [SerializeField] private UnityEvent action = null;
@@ -30,6 +30,7 @@ public class StepTrigger : Trigger
             {
                 sfx.Play();
             }
+            PersistenceComponent?.SetState("main", true);
             action.Invoke();
         }
     }
@@ -37,5 +38,16 @@ public class StepTrigger : Trigger
     public void Deactivate()
     {
         spriteRenderer.sprite = defaultSprite;
+    }
+
+    public void TrueState()
+    {
+        active = false;
+        spriteRenderer.sprite = activatedSprite;
+    }
+
+    public void FalseState()
+    {
+        Deactivate();
     }
 }
