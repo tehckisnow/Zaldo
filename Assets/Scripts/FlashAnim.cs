@@ -7,8 +7,8 @@ public class FlashAnim : MonoBehaviour
     public float time = 8f;
     public float whiteTime = 0.1f;
     public float triggerThreshold = 0.01f;
-    [SerializeField] private Sprite spriteA;
-    [SerializeField] private Sprite spriteB;
+    [SerializeField] private Sprite spriteA = null;
+    [SerializeField] private Sprite spriteB = null;
     private SpriteRenderer spriteRenderer;
     
     void Start()
@@ -29,11 +29,9 @@ public class FlashAnim : MonoBehaviour
     IEnumerator Cycle(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Debug.Log("First delay: " + delay);
-        spriteRenderer.sprite = spriteB;
-        yield return new WaitForSeconds(whiteTime);
         spriteRenderer.sprite = spriteA;
+        yield return new WaitForSeconds(whiteTime);
+        spriteRenderer.sprite = spriteB;
 
-        Debug.Log("after second delay");
     }
 }

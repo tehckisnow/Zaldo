@@ -7,8 +7,8 @@ public class Chest : Interaction, IPersist
     public GameObject contents;
 
     public Persistence PersistenceComponent { get; set; }
-    [SerializeField] private Sprite closedSprite;
-    [SerializeField] private Sprite openSprite;
+    [SerializeField] private Sprite closedSprite = null;
+    [SerializeField] private Sprite openSprite = null;
 
     private GameObject itemInstance;
     private bool opened = false;

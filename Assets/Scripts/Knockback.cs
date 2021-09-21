@@ -20,7 +20,6 @@ public class Knockback : MonoBehaviour
 
     public void TakeKnockback(Vector3 source, float power)
     {
-        Debug.Log(this.name);
         Vector2 direction = transform.position - source;
         rb.AddForce(direction.normalized * power, ForceMode2D.Impulse);
     }

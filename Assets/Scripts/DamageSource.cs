@@ -7,13 +7,13 @@ public class DamageSource : MonoBehaviour
     [SerializeField] private int damage = 1;
     [SerializeField] private float knockbackForce = 1;
     [SerializeField] private bool destroyOnCollision = false;
-
-    private Collider2D coll2D;
+    [SerializeField] private Collider2D coll2D = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        coll2D = gameObject.GetComponent<Collider2D>();
+        if(coll2D == null)
+            coll2D = gameObject.GetComponent<Collider2D>();
     }
 
     // Update is called once per frame

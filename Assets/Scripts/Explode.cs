@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class Explode : MonoBehaviour
 {
-    [SerializeField] private Sprite sprite;
+    [SerializeField] private Sprite sprite = null;
     [SerializeField] private float delay = 1f;
-    [SerializeField] private AudioSource soundEffect;
-    
-    [SerializeField] private bool damage = false;
-    [SerializeField] private Collider2D damageCollider;
-    
+    [SerializeField] private AudioSource soundEffect = null;
+
     private SpriteRenderer spriteRenderer;
     private DamageSource damageSource;
 
@@ -26,7 +23,6 @@ public class Explode : MonoBehaviour
     {
         spriteRenderer.sprite = sprite;
         spriteRenderer.sortingLayerName = "Effects";
-        Debug.Log("boom!");
         StartCoroutine("DestroyObject");
     }
 

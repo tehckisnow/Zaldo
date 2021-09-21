@@ -7,10 +7,10 @@ public class StepTrigger : Trigger
 {
     //public bool active = true;
 
-    [SerializeField] private Sprite defaultSprite;
-    [SerializeField] private Sprite activatedSprite;
-    [SerializeField] private UnityEvent action;
-    [SerializeField] private AudioSource sfx;
+    [SerializeField] private Sprite defaultSprite = null;
+    [SerializeField] private Sprite activatedSprite = null;
+    [SerializeField] private UnityEvent action = null;
+    [SerializeField] private AudioSource sfx = null;
 
     private SpriteRenderer spriteRenderer;
 

@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class Door : Trigger, IPersist
 {
-    [SerializeField] private string destinationScene;
-    [SerializeField] private float x;
-    [SerializeField] private float y;
+    [SerializeField] private string destinationScene = null;
+    [SerializeField] private float x = 0f;
+    [SerializeField] private float y = 0f;
     [SerializeField] private float fadeTime = 2f;
     //soundEffect;
     
     [SerializeField] private bool isOpen = true;
-    [SerializeField] private Sprite openedSprite;
-    [SerializeField] private Sprite closedSprite;
+    [SerializeField] private Sprite openedSprite = null;
+    [SerializeField] private Sprite closedSprite = null;
 
     public Persistence PersistenceComponent { get; set; }
 

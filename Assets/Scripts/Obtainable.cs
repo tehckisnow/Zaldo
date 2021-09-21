@@ -29,10 +29,8 @@ public class Obtainable : Trigger, IPersist
         if(type == ObtainableTypes.Hearts)
         {
             Health playerHealth = player.gameObject.GetComponent<Health>();
-            Debug.Log(playerHealth);
             if(playerHealth != null)
             {
-                Debug.Log("Healing");
                 playerHealth.Heal(amount);
             }
         }
@@ -45,7 +43,6 @@ public class Obtainable : Trigger, IPersist
                 //Debug error
                 Debug.Log("Error: invalid obtainable type");
             }
-            Debug.Log("got " + this.name);
             
             if(PersistenceComponent != null)
             {
