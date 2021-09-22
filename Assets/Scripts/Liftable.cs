@@ -19,7 +19,12 @@ public class Liftable : Interaction
         playerComponent.carriedItem = gameObject;
         gameObject.transform.parent = playerObject.transform;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        playerComponent.inputMode = InputMode.Carry;
+        
+        //!playerComponent.inputMode = InputMode.Carry;
+        playerComponent.inputMode = InputMode.Wait;
+        playerComponent.HaltMovement();
+        //playerComponent.gameObject.GetComponent<Rigidbody2D>();
+
         playerObject.GetComponent<Animator>().SetBool("Carrying", true);
         if(drops.Count > 0)
         {
@@ -54,6 +59,7 @@ public class Liftable : Interaction
             gameObject.transform.localPosition = Vector2.MoveTowards(current, target, maxDistanceDelta);
             yield return new WaitForSeconds(seconds);
         }
+        playerComponent.inputMode = InputMode.Carry;
     }
 
     public void ThrowObject(Facing facing)

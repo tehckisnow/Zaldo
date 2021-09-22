@@ -56,7 +56,8 @@ public class Health : MonoBehaviour
         Animator animator = gameObject.GetComponent<Animator>();
         if(animator != null)
         {
-            animator.Play("TakeDamage");
+            //animator.Play("TakeDamage");
+            animator.SetTrigger("Hurt");
         }
         yield return new WaitForSeconds(0.2f);
 

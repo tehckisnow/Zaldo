@@ -79,6 +79,13 @@ public class PlayerController : MonoBehaviour
     void ApplyMovement()
     {
         rb.AddForce(movement);
+        movement = new Vector2(0f, 0f);
+    }
+
+    public void HaltMovement()
+    {
+        rb.velocity = new Vector2(0f, 0f);
+        Debug.Log(rb.velocity);
     }
 
     private void UpdateHUD()
@@ -104,6 +111,7 @@ public class PlayerController : MonoBehaviour
             case InputMode.Carry:
                 CarryInput();
                 break;
+            case InputMode.Wait:
             default:
                 break;
         }
@@ -414,5 +422,6 @@ public enum InputMode
 {
     Normal,
     Text,
-    Carry
+    Carry,
+    Wait
 }
