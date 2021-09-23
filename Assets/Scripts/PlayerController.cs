@@ -46,7 +46,11 @@ public class PlayerController : MonoBehaviour
     {
         if(GameManager.instance.player != this.gameObject)
         {
-            Destroy(this.gameObject);
+            if(GameManager.instance.player != null)
+            {
+                Destroy(this.gameObject);
+            }
+            GameManager.instance.player = this.gameObject; //!
         }
         DontDestroyOnLoad(this.gameObject);
         rb = GetComponent<Rigidbody2D>();
@@ -185,7 +189,7 @@ public class PlayerController : MonoBehaviour
             InteractionCheck();
         }
         //bomb
-        if(Input.GetButtonDown("Fire3"))
+        if(Input.GetButtonDown("Fire4"))
         {
             DropBomb();
         }

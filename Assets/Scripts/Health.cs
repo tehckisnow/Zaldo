@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -98,6 +99,10 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         //drops
 
+        if(gameObject.GetComponent<PlayerController>() != null)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
         //destroy
         Destroy(this.gameObject);
     }
@@ -108,9 +113,4 @@ public class Health : MonoBehaviour
         health = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
