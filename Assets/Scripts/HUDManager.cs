@@ -30,7 +30,7 @@ public class HUDManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetHearts();
+        //SetHearts();
     }
 
     public void SetValues(int rupees, int bombs, int arrows, int keys)
@@ -41,10 +41,10 @@ public class HUDManager : MonoBehaviour
         keyText.text = keys.ToString();
     }
 
-    private void SetHearts()
+    public void SetHearts(int health, int maxHealth)
     {
-        int maxHealth = playerHealth.GetMaxHealth();
-        int health = playerHealth.GetHealth();
+        // int maxHealth = playerHealth.GetMaxHealth();
+        // int health = playerHealth.GetHealth();
 
         for(int i = 0; i<heartContainers.Length; i++)
         {

@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-        else Destroy(this);
+        else Destroy(this.gameObject);
     }
 
     // Update is called once per frame

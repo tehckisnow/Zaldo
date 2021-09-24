@@ -39,23 +39,29 @@ public class PlayerController : MonoBehaviour
     private float vertical;
 
     private Vector2 movement;
-    public GameObject carriedItem = null;    
+    public GameObject carriedItem = null;
+    private Health playerHealth = null;
 
     // Start is called before the first frame update
     void Start()
     {
         if(GameManager.instance.player != this.gameObject)
         {
-            if(GameManager.instance.player != null)
+            if(GameManager.instance.player == null)
+            {
+                GameManager.instance.player = this.gameObject; //!
+            }
+            else
             {
                 Destroy(this.gameObject);
             }
-            GameManager.instance.player = this.gameObject; //!
         }
+        
         DontDestroyOnLoad(this.gameObject);
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+        playerHealth = GetComponent<Health>();
         SetInteractionPoint();
 
         foreach(ObtainableTypes thing in Enum.GetValues(typeof(ObtainableTypes)))
@@ -100,6 +106,10 @@ public class PlayerController : MonoBehaviour
             obtainables[ObtainableTypes.Bombs], 
             obtainables[ObtainableTypes.Arrows],
             obtainables[ObtainableTypes.Keys]);
+        
+        int maxHealth = playerHealth.GetMaxHealth();
+        int health = playerHealth.GetHealth();
+        hud.SetHearts(health, maxHealth);
     }
 
     private void CheckInput()
