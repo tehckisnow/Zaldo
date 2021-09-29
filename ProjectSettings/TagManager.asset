@@ -13,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Player
+  - Enemies
   - 
   - 
   - 
@@ -43,6 +43,12 @@ TagManager:
     locked: 0
   - name: Sprites
     uniqueID: 3440927823
+    locked: 0
+  - name: Decorations
+    uniqueID: 299308173
+    locked: 0
+  - name: Entities
+    uniqueID: 2602298341
     locked: 0
   - name: Effects
     uniqueID: 190203189

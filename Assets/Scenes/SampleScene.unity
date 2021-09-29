@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 125813397}
   - component: {fileID: 125813396}
   - component: {fileID: 125813399}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,8 +499,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -854039473
-  m_SortingLayer: 1
+  m_SortingLayerID: -1692668955
+  m_SortingLayer: 3
   m_SortingOrder: 10
   m_Sprite: {fileID: 1525595238328900015, guid: 277d3182d5cea0f41aa8760107f4dd91,
     type: 3}
@@ -1486,7 +1486,7 @@ GameObject:
   - component: {fileID: 423207555}
   - component: {fileID: 423207557}
   - component: {fileID: 423207556}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InteractionPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1626,6 +1626,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 310243176}
     m_Modifications:
+    - target: {fileID: 8420709436358181584, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1692668955
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420709436358181584, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8420709436358181585, guid: 2c55c2f57f08ff54e81fbb3e22250948,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1685,6 +1695,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BallEnemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420709436358181586, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420709436358181590, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420709436358181590, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: ignoreLayer
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8952359164522000485, guid: 2c55c2f57f08ff54e81fbb3e22250948,
         type: 3}
@@ -1919,6 +1944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b175f4e3578f0354ea806de5be34ead0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreLayer: 9
   damage: 1
   knockbackForce: 50
   destroyOnCollision: 0
@@ -2098,6 +2124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 575025679}
   - component: {fileID: 575025678}
+  - component: {fileID: 575025680}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -2159,6 +2186,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &575025680
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575025677}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 586fe5a35bf94bb48bec847e5bbf12ff, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &603812820
 GameObject:
   m_ObjectHideFlags: 0
@@ -2323,7 +2446,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 190203189
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -3863982438333609462, guid: eeeaa77109373044298af0e78f35f1bd,
     type: 3}
@@ -2734,8 +2857,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 299308173
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: -7140653466846835296, guid: 16131e8d3dd8baf409a830a7da8d2cc1,
     type: 3}
@@ -10076,7 +10199,7 @@ GameObject:
   - component: {fileID: 1008674467}
   - component: {fileID: 1008674468}
   - component: {fileID: 1008674470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SwordCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10185,6 +10308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b175f4e3578f0354ea806de5be34ead0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreLayer: 4
   damage: 1
   knockbackForce: 10
   destroyOnCollision: 0
@@ -10279,7 +10403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1048947458}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PivotArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10600,8 +10724,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -854039473
-  m_SortingLayer: 1
+  m_SortingLayerID: -1692668955
+  m_SortingLayer: 3
   m_SortingOrder: 90
   m_Sprite: {fileID: -8718851381410504139, guid: 8785d3817601a934a9db4b2497af63ca,
     type: 3}
@@ -15237,8 +15361,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 299308173
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 8964485042257174344, guid: 16131e8d3dd8baf409a830a7da8d2cc1,
     type: 3}
@@ -15796,7 +15920,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 190203189
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2af586d8d876bd64580c40c5b72723cc, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
@@ -16779,8 +16903,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 299308173
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 88203209056465828, guid: 16131e8d3dd8baf409a830a7da8d2cc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -18817,6 +18941,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 310243176}
     m_Modifications:
+    - target: {fileID: 8420709436358181584, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1692668955
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420709436358181584, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8420709436358181585, guid: 2c55c2f57f08ff54e81fbb3e22250948,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18876,6 +19010,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BallEnemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420709436358181586, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420709436358181590, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420709436358181590, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: ignoreLayer
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8952359164522000485, guid: 2c55c2f57f08ff54e81fbb3e22250948,
         type: 3}
@@ -20477,6 +20626,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 310243176}
     m_Modifications:
+    - target: {fileID: 8420709436358181584, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1692668955
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420709436358181584, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8420709436358181585, guid: 2c55c2f57f08ff54e81fbb3e22250948,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20536,6 +20695,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BallEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420709436358181586, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420709436358181590, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420709436358181590, guid: 2c55c2f57f08ff54e81fbb3e22250948,
+        type: 3}
+      propertyPath: ignoreLayer
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8952359164522000485, guid: 2c55c2f57f08ff54e81fbb3e22250948,
         type: 3}

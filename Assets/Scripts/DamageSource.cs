@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DamageSource : MonoBehaviour
 {
+    [SerializeField] private int ignoreLayer = 4;
     [SerializeField] private int damage = 1;
     [SerializeField] private float knockbackForce = 1;
     [SerializeField] private bool destroyOnCollision = false;
@@ -31,6 +32,13 @@ public class DamageSource : MonoBehaviour
         int current = 0;
         while(current < numberOfResults)
         {
+            //check for a layer to ignore
+            if(results[current].gameObject.layer == ignoreLayer)
+            {
+                current++;
+                return;
+            }
+
             //check for health component
             Health health = results[current].gameObject.GetComponent<Health>();
             if(health != null)

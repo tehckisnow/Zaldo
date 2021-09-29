@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 190203189
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 576196210805850572, guid: 04a4f23611eb5f7409d7421d765333f8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b175f4e3578f0354ea806de5be34ead0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreLayer: 8
   damage: 1
   knockbackForce: 1
   destroyOnCollision: 1
@@ -4919,7 +4920,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 190203189
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
