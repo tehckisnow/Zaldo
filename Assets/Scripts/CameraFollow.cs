@@ -35,12 +35,18 @@ public class CameraFollow : MonoBehaviour
     //finds new player instance on scene reload
     private void FindTarget()
     {
-        targetTransform = GameManager.instance.player.transform;
+        if(GameManager.instance.player != null)
+        {
+            targetTransform = GameManager.instance.player.transform;
+        }
     }
 
     private void FollowTarget()
     {
-        Vector3 newPos = new Vector3(targetTransform.position.x, targetTransform.position.y, thisTransform.position.z);
-        thisTransform.position = newPos;
+        if(targetTransform != null)
+        {
+            Vector3 newPos = new Vector3(targetTransform.position.x, targetTransform.position.y, thisTransform.position.z);
+            thisTransform.position = newPos;
+        }
     }
 }

@@ -115,6 +115,6 @@ public class Liftable : Interaction
     IEnumerator DestroyTimer()
     {
         yield return new WaitForSeconds(projectileLife);
-        gameObject.GetComponent<Explode>().Activate();
+        gameObject.GetComponent<Explode>()?.Activate();
     }
 }
