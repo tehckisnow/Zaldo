@@ -2,20 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Description : MonoBehaviour
+public class Description : Interaction
 {
 
     public string description = "This is a sign.";
     
-    // Start is called before the first frame update
-    void Start()
+    public override void Activate()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameManager.instance.player.GetComponent<PlayerController>().inputMode = InputMode.Text;
+        GameManager.instance.textbox.Open(description);
     }
 }

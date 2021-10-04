@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetButtonDown("Fire2"))
         {
-            DescriptionCheck();
+            //DescriptionCheck();
             InteractionCheck();
         }
         //bomb
@@ -346,26 +346,26 @@ public class PlayerController : MonoBehaviour
         swordCollider.gameObject.SetActive(false);
     }
 
-    private void DescriptionCheck()
-    {
-        List<Collider2D> results = new List<Collider2D>();
-        if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
-        {
-            //!Following line uses first result instead of iterating, see InteractionCheck() below
-            foreach(Collider2D item in results)
-            {
-                Description target = item.gameObject.GetComponent<Description>();
-                if(target != null)
-                {
-                    //callback  //!
-                    //disable input //!
-                    inputMode = InputMode.Text;
-                    GameManager.instance.textbox.Open(target.description);
-                    break;
-                };
-            }
-        }
-    }
+    // private void DescriptionCheck()
+    // {
+    //     List<Collider2D> results = new List<Collider2D>();
+    //     if(interactionPoint.OverlapCollider(new ContactFilter2D(), results) > 0)
+    //     {
+    //         //!Following line uses first result instead of iterating, see InteractionCheck() below
+    //         foreach(Collider2D item in results)
+    //         {
+    //             Description target = item.gameObject.GetComponent<Description>();
+    //             if(target != null)
+    //             {
+    //                 //callback  //!
+    //                 //disable input //!
+    //                 inputMode = InputMode.Text;
+    //                 GameManager.instance.textbox.Open(target.description);
+    //                 break;
+    //             };
+    //         }
+    //     }
+    // }
 
 
     private void InteractionCheck()
